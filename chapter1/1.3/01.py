@@ -15,3 +15,15 @@ def encrypt(original: str) -> Tuple[int, int]:
     return dummy, encrypted
 
 
+def decrypt(key1: int, key2: int) -> str:
+    decrypted: int = key1 ^ key2
+    temp: bytes = decrypted.to_bytes((decrypted.bit_length() + 7) // 8, "big")
+    return temp.decode()
+
+
+if __name__ == '__main__':
+    msg = "don't tell anyone"
+    key1, key2 = encrypt(msg)
+    result: str = decrypt(key1, key2)
+    assert msg == result
+
